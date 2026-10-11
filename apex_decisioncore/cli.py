@@ -48,7 +48,7 @@ def cmd_simulate(args) -> int:
     orchestrator, agent = build_canonical_scenario()
     cycles = args.cycles
 
-    print(f"Apex-DecisionCore Sub-Microsecond Execution | Running {cycles} Decision Cycles")
+    print(f"Apex-DecisionCore Decision Cycle Simulation | Running {cycles} Decision Cycles")
     print("-" * 80)
 
     for c in range(1, cycles + 1):
@@ -98,7 +98,7 @@ def cmd_benchmark(args) -> int:
     print(f"p95 Latency           : {p95:7.2f} us")
     print(f"p99 Worst-Case SLA    : {p99:7.2f} us")
     print("-" * 70)
-    print("Hard real-time deterministic SLA verified: < 5 microseconds worst-case.")
+    print(f"Observed p99 worst-case cycle latency (this run): {p99:.2f} us")
     return 0
 
 
@@ -126,7 +126,7 @@ def main() -> int:
     sim_p = subparsers.add_parser("simulate", help="Run multi-cycle continuous decision simulation")
     sim_p.add_argument("--cycles", type=int, default=10, help="Number of decision cycles")
 
-    bench_p = subparsers.add_parser("benchmark", help="Run sub-microsecond latency benchmark")
+    bench_p = subparsers.add_parser("benchmark", help="Run decision-cycle latency benchmark")
     bench_p.add_argument("--iterations", type=int, default=1000, help="Number of benchmark iterations")
 
     clef_p = subparsers.add_parser("export-clef-spec", help="Export Cloudflare Clef & Jev compatible decision JSON")
